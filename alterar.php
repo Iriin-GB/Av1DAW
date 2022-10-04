@@ -33,7 +33,7 @@ $boolTest = false;
     </div>
 
     <br>
-    <form action="atualizar.php" method="POST">
+    <form action="alterar.php" method="POST">
 
         <label for="altMat">Número Matrícula: </label>
         <input type="text" name="matricula" placeholder="Digite a Matrícula"><br>

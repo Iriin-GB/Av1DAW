@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="exibir.php" method="POST">
 
         <label for="exibir">Número da ID: </label>
-        <input type="text" name="matricula" placeholder="Digite o ID"><br>
+        <input type="text" name="id" placeholder="Digite o ID"><br>
 
 
         <input name="botaoBuscar" type="submit" value="Buscar">
@@ -79,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (isset($_POST["botaoBuscar"])) {
             echo " <table>
             <tr>
-                <td>Matricula</td>
                 <td>Nome</td>
-                <td>Email</td>
-                <td>Nome</td>
-                <td>Email</td>     
+                <td>id</td>
+                <td>Período</td>
+                <td>idReq</td>
+                <td>Créditos</td>     
             </tr>
             <tr>
             <td>$matNome</td>
