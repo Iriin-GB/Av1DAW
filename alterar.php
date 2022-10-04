@@ -35,18 +35,10 @@ $boolTest = false;
     <br>
     <form action="alterar.php" method="POST">
 
-        <label for="altMat">Número Matrícula: </label>
-        <input type="text" name="matricula" placeholder="Digite a Matrícula"><br>
+        <label for="altMat">ID Matéria: </label>
+        <input type="text" name="id" placeholder="Digite a ID"><br>
 
         <input name="botaoAlt" type="submit" value="Buscar">
-
-        <?php
-            if($boolTest == true){
-               echo "<label for=\"cadNome\">Nome do Aluno: <label> <input type=\"text\" name=\"nome\" placeholder=\"Digite o Nome\"><br>";
-        
-               echo "<label for=\"cadEmail\">Email: <label> <input type=\"text\" name=\"email\" placeholder=\"Digite o Email\"><br>";
-            }
-        ?>
 
     </form>
 </body>
@@ -56,22 +48,17 @@ $boolTest = false;
 <?php
     if (isset($_POST["botaoAlt"])) {
 
-        $matricula = $_POST["matricula"];
+        $id = $_POST["id"];
 
-        if($matricula != ""){
             if (isset($_POST["botaoAlt"])) {
-                $result = $connection->query("SELECT `nome`, `email` FROM `sistema` WHERE `matricula` = '$matricula' ");
+                $result = $connection->query("SELECT `nome`, `periodo`, `idReq`, `creditos` FROM `sistema` WHERE `matricula` = '$matricula' ");
                 
                 $row = mysqli_fetch_row($result);
 
-                echo "<form action=\"alterar.php\" method=\"POST\">
-                <input type=\"matricula\" name=\"matricula\" id=\"matricula\" value=\"$matricula\">
-                    <input type=\"text\" name=\"nome\" id=\"nome\" value=\"$row[0]\">
-                    <input type=\"text\" name=\"email\" id=\"email\" value=\"$row[1]\">
-                    <input type=\"submit\" name=\"botaoAtt\" value=\"Enviar\">
-                    </form>
-                    ";
-
+                $nomeAlt = $result[0];
+                $periodoAlt = $result[1];
+                $idReqAlt = $result[2];
+                $creditosAlt = $result[3];
 
                     if (isset($_POST["botaoAtt"])) {
                         $matricula = $_POST["matricula"];
@@ -104,5 +91,5 @@ $boolTest = false;
         // } else {
         //     echo "<p>Falha no Cadastramento!</p>";
         // }
-    }
+    
 ?>
