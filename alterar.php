@@ -9,10 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($connection->connect_error) {
         die("Conexao com o banco de dados falhou!!!");
     }
-
-    
 }
-$boolTest = false;
+        $nomeAlt = "";
+        $periodoAlt = "";
+        $idReqAlt = "";
+        $creditosAlt = "";
 ?>
 
 
@@ -28,68 +29,76 @@ $boolTest = false;
 </head>
 
 <body>
-<div>
+    <div>
         <div><a style="margin-right: 25px" href="./criar.php">Criar Matricula</a> <a style="margin-right: 25px" href="./alterar.php">Alterar Matrícula</a> <a style="margin-right: 25px" href="./apagar.php">Apagar Matrícula</a> <a style="margin-right: 25px" href="./exibir.php">Exibir</a><a style="margin-right: 25px" href="./exibirTodas.php">Exibir Todas</a></div>
     </div>
 
     <br>
-    <form action="alterar.php" method="POST">
+    
+    </div>
+    <div>
+        <form action="alterar.php" method="POST">
 
-        <label for="altMat">ID Matéria: </label>
-        <input type="text" name="id" placeholder="Digite a ID"><br>
+            <label for="altMat">ID Matéria: </label>
+            <input type="text" name="id" placeholder="Digite a ID"><br>
 
-        <input name="botaoAlt" type="submit" value="Buscar">
+            <input name="botaoAlt" type="submit" value="Buscar">
 
-    </form>
+        </form>
+        <hr>
+    </div>
+    <div style="float:left">
+        <form action="alterar.php" method="POST">
+
+            <label for="attNomeMat">Novo nome: </label>
+            <input type="text" name="newNome" placeholder="Digite o novo nome" value="<?php      $nomeAlt?>"><br>
+            <label for="attNomeMat">Novo periodo: </label>
+            <input type="text" name="newPeriodo" placeholder="Digite o novo periodo" value="<?php      $periodoAlt?>"><br>
+            <label for="attNomeMat">Nova Matéria requisito: </label>
+            <input type="text" name="newIdReq" placeholder="Digite o novo requisito" value="<?php      $idReqAlt?>"><br>
+            <label for="attNomeMat">Novo valor de créditos: </label>
+            <input type="text" name="newCreditos" placeholder="Digite o novo créditos" value="<?php      $creditosAlt?>"><br>
+
+            <input name="botaoAlt" type="submit" value="Mudar">
+
+        </form>
+    
+
 </body>
 
 </html>
 
 <?php
-    if (isset($_POST["botaoAlt"])) {
+if (isset($_POST["botaoAlt"])) {
 
-        $id = $_POST["id"];
+    $id = $_POST["id"];
+        $result = $connection->query("SELECT `nome`, `periodo`, `idReq`, `creditos` FROM `sistema` WHERE `id` = '$id' ");
 
-            if (isset($_POST["botaoAlt"])) {
-                $result = $connection->query("SELECT `nome`, `periodo`, `idReq`, `creditos` FROM `sistema` WHERE `matricula` = '$matricula' ");
-                
-                $row = mysqli_fetch_row($result);
+        $row = mysqli_fetch_row($result);
 
-                $nomeAlt = $result[0];
-                $periodoAlt = $result[1];
-                $idReqAlt = $result[2];
-                $creditosAlt = $result[3];
+        $nomeAlt = $row[0];
+        $periodoAlt = $row[1];
+        $idReqAlt = $row[2];
+        $creditosAlt = $row[3];
 
-                    if (isset($_POST["botaoAtt"])) {
-                        $matricula = $_POST["matricula"];
-                        $nome = $_POST["nome"];
-                        $email = $_POST["email"];
-                    
-                        $atualizarSQL = "UPDATE  `sistema` SET `matricula` = '$matricula', `nome` = '$nome', `email` ='$email' ";
-                        $resultado = $connection->query($atualizarSQL);
-                        if (!$connection->query($atualizarSQL)) {
-                            echo ("Error description: " . $conn->error);
-                        }
-                        echo $resultado;
-                        if ($resultado == true) {
-                            echo "<p>Matrícula Criada!</p>";
-                        } else {
-                            echo "<p>Falha na Atualização Cadastral!</p>";
-                        }
-                    }
-            
+        if (isset($_POST["botaoAtt"])) {
+            $nome = $_POST["newNome"];
+            $periodo = $_POST["newPeriodo"];
+            $idReq = $_POST["newIdReq"];
+            $creditos = $_POST["newCreditos"];
+
+            $atualizarSQL = "UPDATE  `sistema` SET `nome` = '$nome', `periodo` = '$periodo', `idReq` ='$idReq', `creditos` ='$creditos' ";
+            $resultado = $connection->query($atualizarSQL);
+            if (!$connection->query($atualizarSQL)) {
+                echo ("Error description: " . $conn->error);
+            }
+            // echo $resultado;
+            if ($resultado == true) {
+                echo "<p>Matrícula Criada!</p>";
+            } else {
+                echo "<p>Falha na Atualização Cadastral!</p>";
+            }
         }
     }
-    
-        // $inserirSQL = "INSERT INTO `sistema`(`matricula`, `nome`, `email`) VALUES ('$matricula','$nome','$email')";
-    
-        // $resultado = $connection->query($inserirSQL);
-    
-    
-        // if ($resultado == true) {
-        //     echo "<p>Matrícula Criada!</p>";
-        // } else {
-        //     echo "<p>Falha no Cadastramento!</p>";
-        // }
-    
+
 ?>
