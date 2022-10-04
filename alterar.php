@@ -54,19 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 
 <?php
-if (isset($_POST["botaoAlt"])) {
+// if (isset($_POST["botaoAlt"])) {
 
-    $id = $_POST["id"];
+//     $id = $_POST["id"];
 
-        $result = $connection->query("SELECT `nome`, `periodo`, `idReq`, `creditos` FROM `sistema` WHERE `id` = '$id' ");
+//         $result = $connection->query("SELECT `nome`, `periodo`, `idReq`, `creditos` FROM `sistema` WHERE `id` = '$id' ");
 
-        $row = mysqli_fetch_row($result);
+//         $row = mysqli_fetch_row($result);
 
-        $nomeAlt = $row[0];
-        $periodoAlt = $row[1];
-        $idReqAlt = $row[2];
-        $creditosAlt = $row[3];
+//         $nomeAlt = $row[0];
+//         $periodoAlt = $row[1];
+//         $idReqAlt = $row[2];
+//         $creditosAlt = $row[3];
 
-    }
+//     }
 
 ?>
