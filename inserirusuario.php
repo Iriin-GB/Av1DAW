@@ -26,7 +26,6 @@ if($txtForce != "txt"){
         $end = explode(";",$line); 
 
         $sqlInsert = "INSERT INTO `sistemaalunos`(`nome`, `email`, `senha`, `usuario`, `tipo`) VALUES ('$end[0]','$end[1]','$end[2]','$end[3]','$end[4]')";
-        echo $sqlInsert;
         $result = $connection->query($sqlInsert);
     }
 }
